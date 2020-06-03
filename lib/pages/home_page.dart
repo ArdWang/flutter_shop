@@ -6,10 +6,6 @@ import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_easyrefresh/material_header.dart';
-import 'package:flutter_easyrefresh/material_footer.dart';
-
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -27,7 +23,6 @@ class _HomePageState extends State<HomePage>
 
   String homePageContentes = '正在获取数据';
 
- 
   //默认经纬度
   var formData = {'lon': '32.162746', 'lat': '118.703763'};
 
@@ -68,40 +63,54 @@ class _HomePageState extends State<HomePage>
             List<Map> floor3List = (data['data']['floor3'] as List).cast();
 
             return EasyRefresh(
-              header: MaterialHeader(),
-              footer: MaterialFooter(),
-              child: ListView(
-                children: <Widget>[
-                  SwiperDiy(
-                    swiperDataList: swiper,
-                  ),
-                  TopNavgator(navgatorList: navgatorList),
-                  AdBanner(adPicture: adPicture),
-                  LeaderPhone(
-                      leaderImage: leaderImage, leaderPhone: leaderPhone),
-                  Recommend(recommendList: recommandList),
-                  FloorTitle(picture_address: floor1Title),
-                  FloorContent(floorGoodsList: floor1List),
-                  FloorTitle(picture_address: floor2Title),
-                  FloorContent(floorGoodsList: floor2List),
-                  FloorTitle(picture_address: floor3Title),
-                  FloorContent(floorGoodsList: floor3List),
-                  _hotGoods(),
-                ],
-              ),
-              onLoad:() async{
-                print('开始加载更多......');
-                var formData = {'page': page};
-                await request(homePageBelowConten, formData: formData).then((val) {
-                  var data = json.decode(val.toString());
-                  List<Map> newGoodsList = (data['data'] as List).cast();
-                  setState(() {
-                    hotGoodsList.addAll(newGoodsList);
-                    page++;
+                /*header: ClassicalHeader(
+                  refreshText: '下拉刷新',
+                  refreshReadyText: '释放刷新',
+                  refreshingText: '正在刷新...',
+                  refreshedText: '刷新完成',
+                  refreshFailedText: '刷新失败',
+                  noMoreText: '没有更多',
+                  infoText: '更新于 %T',
+                ),*/
+                footer: ClassicalFooter(
+                    loadedText: '加载完成',
+                    loadReadyText: '释放加载',
+                    loadingText: '正在加载...',
+                    loadFailedText: '加载失败',
+                    noMoreText: '没有更多',
+                    infoText: '更新于 %T'),
+                child: ListView(
+                  children: <Widget>[
+                    SwiperDiy(
+                      swiperDataList: swiper,
+                    ),
+                    TopNavgator(navgatorList: navgatorList),
+                    AdBanner(adPicture: adPicture),
+                    LeaderPhone(
+                        leaderImage: leaderImage, leaderPhone: leaderPhone),
+                    Recommend(recommendList: recommandList),
+                    FloorTitle(picture_address: floor1Title),
+                    FloorContent(floorGoodsList: floor1List),
+                    FloorTitle(picture_address: floor2Title),
+                    FloorContent(floorGoodsList: floor2List),
+                    FloorTitle(picture_address: floor3Title),
+                    FloorContent(floorGoodsList: floor3List),
+                    _hotGoods(),
+                  ],
+                ),
+                onLoad: () async {
+                  print('开始加载更多......');
+                  var formData = {'page': page};
+                  await request(homePageBelowConten, formData: formData)
+                      .then((val) {
+                    var data = json.decode(val.toString());
+                    List<Map> newGoodsList = (data['data'] as List).cast();
+                    setState(() {
+                      hotGoodsList.addAll(newGoodsList);
+                      page++;
+                    });
                   });
                 });
-              }
-            );
           } else {
             return Center(
               child: Text('加载中....'),
@@ -268,6 +277,7 @@ class TopNavgator extends StatelessWidget {
       height: ScreenUtil().setHeight(320),
       padding: EdgeInsets.all(3.0),
       child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 5,
         padding: EdgeInsets.all(5.0),
         children: navgatorList.map((item) {

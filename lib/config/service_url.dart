@@ -11,7 +11,7 @@
 const servicePath = {
   homePageContent: 'wxmini/homePageContent', //商城首页信息
   homePageBelowConten: 'wxmini/homePageBelowConten', //商城首页热卖商城
-  category: 'wxmini/getCategory',
+  category: 'wxmini/getCategory', //商品类别信息
   getMallGoods: 'wxmini/getMallGoods',
   getGoodDetailById: 'wxmini/getGoodDetailById',
 };
