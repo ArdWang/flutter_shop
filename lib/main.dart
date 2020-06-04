@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/provide/content.dart';
 import './pages/index_page.dart';
 import 'package:provider/provider.dart';
+import './provide/child_category.dart';
 //import 'package:provide/provide.dart';
 //import './provide/content.dart';
 
@@ -9,7 +10,10 @@ import 'package:provider/provider.dart';
 void main(){
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_)=>Counter())],
+      providers: [
+        ChangeNotifierProvider(create: (_)=>Counter()),
+        ChangeNotifierProvider(create: (_)=>ChildCategory()),
+      ],
       child: MyApp(),
     ),
   );
