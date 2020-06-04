@@ -34,6 +34,9 @@ dependencies:
   url_launcher: ^5.4.10
   flutter_easyrefresh: ^2.1.1
   provide: ^1.0.2
+  # 目前谷歌放弃了 provide 了改用了 provider了
+  provider: ^4.1.0
+
 
 dev_dependencies:
   flutter_test:

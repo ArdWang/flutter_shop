@@ -345,7 +345,7 @@ class Recommend extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
-            bottom: BorderSide(width: 0.5, color: Colors.black12),
+            bottom: BorderSide(width: 1, color: Colors.black12),
           )),
       child: Text('商品推荐',
           style: TextStyle(
@@ -402,7 +402,7 @@ class Recommend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(380),
+      height: ScreenUtil().setHeight(386),
       margin: EdgeInsets.only(top: 10.0),
       child: Column(
         children: <Widget>[

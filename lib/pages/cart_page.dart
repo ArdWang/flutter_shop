@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provide/provide.dart';
+//import 'package:provide/provide.dart';
+
+import 'package:provider/provider.dart';
 import '../provide/content.dart';
+//import '../provide/content.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -19,30 +22,29 @@ class CartPage extends StatelessWidget {
 }
 
 class Number extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+    //Counter c = Provider.of<Counter>(context);
     return Container(
       margin: EdgeInsets.only(top:200),
-      child: Provide<Counter>(
-        builder: (context, child, counter){
-          return Text(
-            '${counter.value}',
-            style: Theme.of(context).textTheme.display1,
-          );
-        },
-      ),
+      child: Text(
+            '${context.watch<Counter>().value}',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+      
     );
   }
 }
 
 class MyButton extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: RaisedButton(
         onPressed: (){
-          Provide.value<Counter>(context).increment();
+          context.read<Counter>().increment();
         },
         child: Text('递增'),
       ),
