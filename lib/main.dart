@@ -3,6 +3,7 @@ import 'package:flutter_shop/provide/content.dart';
 import './pages/index_page.dart';
 import 'package:provider/provider.dart';
 import './provide/child_category.dart';
+import './provide/category_goods_list.dart';
 //import 'package:provide/provide.dart';
 //import './provide/content.dart';
 
@@ -13,6 +14,7 @@ void main(){
       providers: [
         ChangeNotifierProvider(create: (_)=>Counter()),
         ChangeNotifierProvider(create: (_)=>ChildCategory()),
+        ChangeNotifierProvider(create: (_)=>CategoryGoodsListProvider()),
       ],
       child: MyApp(),
     ),
