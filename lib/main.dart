@@ -4,11 +4,13 @@ import './pages/index_page.dart';
 import 'package:provider/provider.dart';
 import './provide/child_category.dart';
 import './provide/category_goods_list.dart';
+import 'package:fluro/fluro.dart';
 //import 'package:provide/provide.dart';
 //import './provide/content.dart';
 
 
 void main(){
+  final router = Router();
   runApp(
     MultiProvider(
       providers: [
@@ -38,3 +40,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

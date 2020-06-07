@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage>
                     loadReadyText: '释放加载',
                     loadingText: '正在加载...',
                     loadFailedText: '加载失败',
-                    noMoreText: '没有更多',
+                    noMoreText: '',
                     infoText: '更新于 %T'),
                 child: ListView(
                   children: <Widget>[
