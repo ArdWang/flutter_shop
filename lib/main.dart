@@ -7,10 +7,11 @@ import './provide/category_goods_list.dart';
 import 'package:fluro/fluro.dart';
 //import 'package:provide/provide.dart';
 //import './provide/content.dart';
+import './routers/routers.dart';
+import './routers/application.dart';
 
 
 void main(){
-  final router = Router();
   runApp(
     MultiProvider(
       providers: [
@@ -26,10 +27,18 @@ void main(){
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final router = Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
+
     return Container(
       child: Material(
         child: MaterialApp(
            title:'百姓生活+',
+
+            onGenerateRoute: Application.router.generator,
+
            debugShowCheckedModeBanner:false,
            theme: ThemeData(
              primaryColor:Colors.pink,
