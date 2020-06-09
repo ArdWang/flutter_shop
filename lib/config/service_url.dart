@@ -13,7 +13,7 @@ const servicePath = {
   homePageBelowConten: 'wxmini/homePageBelowConten', //商城首页热卖商城
   category: 'wxmini/getCategory', //商品类别信息
   getMallGoods: 'wxmini/getMallGoods', // 商品分类的商品列表
-  getGoodDetailById: 'wxmini/getGoodDetailById',
+  getGoodDetailById: 'wxmini/getGoodDetailById', //商品详细信息
 };
 
 //商店首页信息

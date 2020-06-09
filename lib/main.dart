@@ -9,6 +9,7 @@ import 'package:fluro/fluro.dart';
 //import './provide/content.dart';
 import './routers/routers.dart';
 import './routers/application.dart';
+import './provide/details_info.dart';
 
 
 void main(){
@@ -18,6 +19,7 @@ void main(){
         ChangeNotifierProvider(create: (_)=>Counter()),
         ChangeNotifierProvider(create: (_)=>ChildCategory()),
         ChangeNotifierProvider(create: (_)=>CategoryGoodsListProvider()),
+        ChangeNotifierProvider(create: (_)=>DetailsInfoProvider()),
       ],
       child: MyApp(),
     ),
