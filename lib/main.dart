@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
            title:'百姓生活+',
 
-            onGenerateRoute: Application.router.generator,
+           onGenerateRoute: Application.router.generator,
 
            debugShowCheckedModeBanner:false,
            theme: ThemeData(

@@ -421,7 +421,7 @@ class Recommend extends StatelessWidget {
 class FloorTitle extends StatelessWidget {
   final String picture_address;
 
-  const FloorTitle({Key key, this.picture_address}) : super(key: key);
+  const FloorTitle({this.picture_address});
 
   @override
   Widget build(BuildContext context) {
