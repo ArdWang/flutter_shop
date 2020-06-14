@@ -10,6 +10,7 @@ import 'package:fluro/fluro.dart';
 import './routers/routers.dart';
 import './routers/application.dart';
 import './provide/details_info.dart';
+import './provide/cart.dart';
 
 
 void main(){
@@ -20,6 +21,7 @@ void main(){
         ChangeNotifierProvider(create: (_)=>ChildCategory()),
         ChangeNotifierProvider(create: (_)=>CategoryGoodsListProvider()),
         ChangeNotifierProvider(create: (_)=>DetailsInfoProvider()),
+        ChangeNotifierProvider(create: (_)=>CartProvider())
       ],
       child: MyApp(),
     ),

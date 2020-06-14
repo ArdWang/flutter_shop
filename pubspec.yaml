@@ -44,6 +44,10 @@ dependencies:
   fluttertoast: ^4.0.1
   # flutter路由
   fluro: "^1.6.3"
+  # flutter_html
+  flutter_html: ^1.0.0
+  # 存储
+  shared_preferences: ^0.5.7+3
 
 
 dev_dependencies:

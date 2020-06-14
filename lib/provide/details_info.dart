@@ -24,10 +24,10 @@ class DetailsInfoProvider with ChangeNotifier{
 
 
   //从后台获取商品数据
-  getGoodsInfo(String id){
+  getGoodsInfo(String id) async{
     var formData = {'goodId':id};
 
-    request(getGoodDetailById, formData:formData).then((value){
+    await request(getGoodDetailById, formData:formData).then((value){
       var responseData = json.decode(value.toString());
       print(responseData);
       goodsInfo = DetailsModel.fromJson(responseData);

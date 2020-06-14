@@ -1,53 +1,84 @@
 import 'package:flutter/material.dart';
-//import 'package:provide/provide.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:provider/provider.dart';
-import '../provide/content.dart';
-//import '../provide/content.dart';
-
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body:Center(
-        child: Column(
-          children:<Widget>[
-            Number(),
-            MyButton(),
-          ],
-        ),
-      ),
-    );
-  }
+  _CartPageState createState() => _CartPageState();
 }
 
-class Number extends StatelessWidget {
+class _CartPageState extends State<CartPage> {
 
+  List<String> testList = [];
 
   @override
   Widget build(BuildContext context) {
-    //Counter c = Provider.of<Counter>(context);
+    _show();
     return Container(
-      margin: EdgeInsets.only(top:200),
-      child: Text(
-            '${context.watch<Counter>().value}',
-            style: Theme.of(context).textTheme.headline4,
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 500.0,
+            child: ListView.builder(
+              itemCount: testList.length,
+              itemBuilder: (context, index){
+                return ListTile(
+                  title: Text(testList[index]),
+                );
+              },
+            ),
           ),
-      
-    );
-  }
-}
 
-class MyButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        onPressed: (){
-          context.read<Counter>().increment();
-        },
-        child: Text('递增'),
+          RaisedButton(
+            onPressed: (){
+              _add();
+            },
+            child: Text('增加'),
+          ),
+           RaisedButton(
+            onPressed: (){
+              _clear();
+            },
+            child: Text('清空'),
+          ),
+
+        ],
       ),
     );
   }
+
+  //增加方法
+  void _add() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp = "技术胖是最胖得！！！";
+    testList.add(temp);
+    prefs.setStringList("testInfo", testList);
+
+    _show();
+  }
+
+  //查询方法
+  void _show() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(prefs.getStringList("testInfo") != null){
+      setState(() {
+        testList = prefs.getStringList("testInfo");
+      });
+    }
+  }
+
+  //删除
+  void _clear() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //删除所有值
+    //prefs.clear();
+    prefs.remove("testInfo");
+
+    setState(() {
+      testList = [];
+    });
+  }
+
+
+
+
 }
