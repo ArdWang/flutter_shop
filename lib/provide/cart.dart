@@ -10,54 +10,76 @@ class CartProvider with ChangeNotifier {
 
   List<CartListModel> cartList12 = [];
   save(goodsId, goodsName, count, price, images) async {
-    //try{
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      cartString = prefs.getString('cartInfo');
-      print(cartString);
-      var temp=cartString==null?[]:json.decode(cartString.toString());
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    cartString = prefs.getString('cartInfo');
+    print(cartString);
+    var temp = cartString == null ? [] : json.decode(cartString.toString());
 
-      List tempList = (temp as List).cast();
-      //cartList12 = CartListModel.toModel(tempList);
+    List tempList = (temp as List).cast();
+    //cartList12 = CartListModel.toModel(tempList);
 
-      bool isHave = false;
-      int ival = 0;
+    bool isHave = false;
+    int ival = 0;
 
-      tempList.forEach((item) {
-        if (item['goodsId'] == goodsId) {
-          tempList[ival]['count'] = item['count'] + 1;
-          //cartList[ival].count++;
-          isHave = true;
-        }
-        ival++;
-      });
-
-      if (!isHave) {
-        tempList.add({
-          'goodsId': goodsId,
-          'goodsName': goodsName,
-          'count': count,
-          'price': price,
-          'images': images
-        });
+    tempList.forEach((item) {
+      if (item['goodsId'] == goodsId) {
+        tempList[ival]['count'] = item['count'] + 1;
+        cartList[ival].count++;
+        isHave = true;
       }
+      ival++;
+    });
 
-      cartString = json.encode(tempList).toString();
-      print(cartString);
+    if (!isHave) {
+      Map<String, dynamic> newGoods = {
+        'goodsId': goodsId,
+        'goodsName': goodsName,
+        'count': count,
+        'price': price,
+        'images': images
+      };
 
-      prefs.setString('cartInfo', cartString);
-    //}catch(e){
+      tempList.add(newGoods);
+      cartList.add(CartInfoModel.fromJson(newGoods));
+    }
 
-    //}
+    cartString = json.encode(tempList).toString();
+    print('字符串》》》》》》》》》》》${cartString}');
+    print('数据模型》》》》》》》》》》》${cartList}');
+
+    prefs.setString('cartInfo', cartString);
 
     notifyListeners();
-
   }
 
   remove() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.remove('cartInfo');
+
+    cartList = [];
+
     print('清空完成------------------');
     notifyListeners();
   }
+
+  getCartInfo() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    cartString = prefs.getString("cartInfo");
+    cartList = [];
+
+    if(cartString == null){
+      cartList = [];
+    }else{
+      List<Map> tempList = (json.decode(cartString.toString()) as List).cast();
+      tempList.forEach((item) {
+        cartList.add(CartInfoModel.fromJson(item));
+      }); 
+    }
+
+    notifyListeners();
+    
+  }
+
+
 }
