@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/cart_info.dart';
 import './cart_count.dart';
+import 'package:provider/provider.dart';
+import '../../provide/cart.dart';
 
 
 class CartItem extends StatelessWidget {
@@ -12,7 +14,7 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(item);
+    //print(item);
     return Container(
       margin: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
       padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
@@ -24,10 +26,10 @@ class CartItem extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          _cartCheckBtn(),
+          _cartCheckBtn(context, item),
           _cartImage(),
           _cartGoodsName(),
-          _cartPrice()
+          _cartPrice(context, item)
         ],
       ),
     );
@@ -35,10 +37,10 @@ class CartItem extends StatelessWidget {
 
 
   // 多选按钮
-  Widget _cartCheckBtn(){
+  Widget _cartCheckBtn(context, item){
     return Container(
       child: Checkbox(
-        value: true,
+        value: item.isCheck,
         activeColor: Colors.pink,
         onChanged: (bool val){
 
@@ -75,7 +77,7 @@ class CartItem extends StatelessWidget {
   }
 
   //商品价格
-  Widget _cartPrice(){
+  Widget _cartPrice(context, item){
     return Container(
       width: ScreenUtil().setWidth(150),
       alignment: Alignment.centerRight,
@@ -84,7 +86,9 @@ class CartItem extends StatelessWidget {
           Text('￥${item.price}'),
           Container(
             child: InkWell(
-              onTap: (){},
+              onTap: (){
+                Provider.of<CartProvider>(context, listen: false).deleteOneGoods(item.goodsId);
+              },
               child: Icon(
                 Icons.delete_forever,
                 color: Colors.black26,
