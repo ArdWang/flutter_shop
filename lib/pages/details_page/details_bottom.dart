@@ -41,7 +41,6 @@ class DetailsBottom extends StatelessWidget {
             onTap: () async{
               print("我进来了吗？");
               await Provider.of<CartProvider>(context, listen: false).save(goodsId, goodsName, count, price, images);
-             
             },
             child: Container(
               alignment: Alignment.center,
