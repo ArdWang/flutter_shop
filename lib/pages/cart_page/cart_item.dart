@@ -43,7 +43,8 @@ class CartItem extends StatelessWidget {
         value: item.isCheck,
         activeColor: Colors.pink,
         onChanged: (bool val){
-
+          item.isCheck = val;
+          Provider.of<CartProvider>(context, listen: false).changeCheckState(item);
         },
       ),
     );
@@ -70,7 +71,7 @@ class CartItem extends StatelessWidget {
       child: Column(
         children:<Widget>[
           Text(item.goodsName),
-          CartCount()
+          CartCount(item),
         ],
       ),
     );

@@ -22,14 +22,15 @@ class CartBottom extends StatelessWidget {
   }
 
   Widget selectAllBtn(context){
+    bool isAllCheck = Provider.of<CartProvider>(context, listen: true).isAllCheck;
     return Container(
       child: Row(
         children: <Widget>[
           Checkbox(
-            value: true,
+            value: isAllCheck,
             activeColor: Colors.pink, 
             onChanged: (bool val){
-
+              Provider.of<CartProvider>(context, listen: false).changeAllCheckBtnState(val);
             },
           ),
           Text('全选'),
