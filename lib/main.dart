@@ -11,6 +11,7 @@ import './routers/routers.dart';
 import './routers/application.dart';
 import './provide/details_info.dart';
 import './provide/cart.dart';
+import './provide/currentindex.dart';
 
 
 void main(){
@@ -21,7 +22,8 @@ void main(){
         ChangeNotifierProvider(create: (_)=>ChildCategory()),
         ChangeNotifierProvider(create: (_)=>CategoryGoodsListProvider()),
         ChangeNotifierProvider(create: (_)=>DetailsInfoProvider()),
-        ChangeNotifierProvider(create: (_)=>CartProvider())
+        ChangeNotifierProvider(create: (_)=>CartProvider()),
+        ChangeNotifierProvider(create: (_)=>CurrentIndexProvider())
       ],
       child: MyApp(),
     ),
